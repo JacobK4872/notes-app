@@ -44,18 +44,14 @@ export default class NotesView {
 
         return `
             <div class="notes__list-item" data-note-id=${id}">
-                
                 <div class="notes__small-title>${title}</div>
-
                 <div class="notes__small-body>
                     ${body.substring(0, MAX_BODY_LENGTH)}
                     ${body.length > MAX_BODY_LENGTH ? "..." : ""}
                 </div>
-
                 <div class="notes__small-updated>
                     ${updated.toLocaleString(undefined, { dataStyle: "full", timeStyle: "short" })}
                 </div>
-
             </div>
         `;
     }
@@ -73,5 +69,21 @@ export default class NotesView {
 
             notesListContainer.insertAdjacentHTML("beforeend", html);
         }
+
+        // add select/delete events for each list ite,
+        notesListContainer.querySelectorAll(".notes__list-item").forEach(noteListItem => {
+            noteListItem.addEventListener("click", () => {
+                this.onNoteSelect(noteListItem.dataset.noteId);
+            });
+
+            noteListItem.addEventListener("dblclick", () => {
+                const doDelete = confirm("Are you sure you want to delete this note?");
+
+                if (doDelete) {
+                    this.onNoteDelete(noteListItem.dataset.noteId);
+                }
+            });
+        });
+
     }
 }
