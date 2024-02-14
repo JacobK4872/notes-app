@@ -1,9 +1,8 @@
-import NotesAPI from "./NotesAPI.js"
+import NotesView from "./NotesView.js"
 
-NotesAPI.saveNote({
-    // id: 489570,
-    title: "NEW TITLE",
-    body: "Soda"
+const app = document.getElementById("app");
+const view = new NotesView(app, {
+    onNoteSelect() {
+        console.log("Notes have been selected");
+    }
 });
-
-console.log(NotesAPI.getAllNotes());
