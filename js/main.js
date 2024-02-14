@@ -1,4 +1,10 @@
+import NotesAPI from "./NotesAPI.js";
 import NotesView from "./NotesView.js"
+
+// NotesAPI.saveNote({
+//     title: "Note 3",
+//     body: "note 3 body"
+// });
 
 const app = document.getElementById("app");
 const view = new NotesView(app, {
@@ -12,3 +18,6 @@ const view = new NotesView(app, {
     }
     
 });
+
+
+view.updateNoteList(NotesAPI.getAllNotes());
