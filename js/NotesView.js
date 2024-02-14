@@ -33,24 +33,23 @@ export default class NotesView {
             });
         });
 
-        // console.log(this._createListItemHTML(300, "HEY", "WHats up", new Date()));
+        console.log(this._createListItemHTML(300, "HEY", "WHats up", new Date()));
         // TODO: hide the preview
 
     }
-
 
     _createListItemHTML(id, title, body, updated) {
         const MAX_BODY_LENGTH = 60;
 
         return `
-            <div class="notes__list-item" data-note-id=${id}">
-                <div class="notes__small-title>${title}</div>
-                <div class="notes__small-body>
+            <div class="notes__list-item" data-note-id="${id}">
+                <div class="notes__small-title">${title}</div>
+                <div class="notes__small-body">
                     ${body.substring(0, MAX_BODY_LENGTH)}
                     ${body.length > MAX_BODY_LENGTH ? "..." : ""}
                 </div>
-                <div class="notes__small-updated>
-                    ${updated.toLocaleString(undefined, { dataStyle: "full", timeStyle: "short" })}
+                <div class="notes__small-updated">
+                    ${updated.toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" })}
                 </div>
             </div>
         `;
@@ -85,5 +84,16 @@ export default class NotesView {
             });
         });
 
+    }
+
+    updateActiveNote(note) {
+        this.root.querySelector(".notes__title").value = note.title;
+        this.root.querySelector(".notes__body").value = note.body;
+
+        this.root.querySelectorAll(".notes__list-item").forEach(noteListItem => {
+            noteListItem.classList.remove("notes__list-item--selected");
+        });
+
+        this.root.querySelector(`.notes__list-item[data-note-id="${note.id}"]`).classList.add("notes__list-item--selected");
     }
 }
