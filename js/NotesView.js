@@ -33,8 +33,8 @@ export default class NotesView {
             });
         });
 
-        console.log(this._createListItemHTML(300, "HEY", "WHats up", new Date()));
-        // TODO: hide the preview
+        // console.log(this._createListItemHTML(300, "HEY", "WHats up", new Date()));
+        this.updateNotePreviewVisibility(false);
 
     }
 
@@ -95,5 +95,10 @@ export default class NotesView {
         });
 
         this.root.querySelector(`.notes__list-item[data-note-id="${note.id}"]`).classList.add("notes__list-item--selected");
+    }
+
+
+    updateNotePreviewVisibility(visible) {
+        this.root.querySelector(".notes__preview").style.visible = visible ? "visible" : "hidden";
     }
 }
